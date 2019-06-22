@@ -9,7 +9,7 @@
 freader::freader(char *name, char *md) {
     file = fopen(name, md);
     if (file == nullptr) {
-        throw std::runtime_error("while opening");
+        throw std::runtime_error("error while opening");
     }
 }
 
@@ -21,14 +21,14 @@ size_t freader::read_segment(size_t sz, vector<unsigned char> &seg) {
         seg.pop_back();
     }
     if (ferror(file)) {
-        throw;
+        throw std::runtime_error("error while reading");
     }
     return cnt;
 }
 void freader::read_char(unsigned char &c) {
     fread(&c, 1, 1, file);
     if (ferror(file)) {
-        throw;
+        throw std::runtime_error("error while reading");
     }
 }
 freader::~freader() {

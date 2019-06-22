@@ -48,21 +48,19 @@ void decompress(char *input, char *output) {
     int x;
     vector<int> frec;
     unsigned char c;
-    try {
-        for (int i = 0; i < 256; i++) {
-            x = 0;
 
-            for (size_t j = 0; j < 4; j++) {
-                in.read_char(c);
-                x += (c << (j * 8));
-            }
-            frec.push_back(x);
+    for (size_t i = 0; i < 256; i++) {
+        x = 0;
+
+        for (size_t j = 0; j < 4; j++) {
+            in.read_char(c);
+            x += (c << (j * 8));
         }
-    } catch (std::runtime_error const & e) {
-        throw;
+        frec.push_back(x);
     }
+
     bool empty = 1;
-    for (int i = 0; i < 256; i++) {
+    for (size_t i = 0; i < 256; i++) {
         if (frec[i] != 0) {
             empty = 0;
             break;
@@ -73,34 +71,30 @@ void decompress(char *input, char *output) {
         return;
     }
     unsigned char cnt_free_cells;
-    try {
-        in.read_char(cnt_free_cells);
-    }  catch (std::runtime_error const & e) {
-        throw;
-    }
+
+    in.read_char(cnt_free_cells);
+
     a.set_frec(frec);
     a.build();
 
     vector<unsigned char> bytes, decodebytes;
     int i = 0;
-    try {
-        while (in.read_segment(8192, bytes)) {
-            if (i != 0) {
-                a.decode_tail(0, decodebytes);
-                out.write_segment(decodebytes);
-                decodebytes.clear();
-            }
-            a.decode(bytes, decodebytes);
+
+    while (in.read_segment(8192, bytes)) {
+        if (i != 0) {
+            a.decode_tail(0, decodebytes);
             out.write_segment(decodebytes);
-            bytes.clear();
             decodebytes.clear();
-            i++;
         }
-        a.decode_tail(cnt_free_cells, decodebytes);
+        a.decode(bytes, decodebytes);
         out.write_segment(decodebytes);
-    }  catch (std::runtime_error const & e) {
-        throw;
+        bytes.clear();
+        decodebytes.clear();
+        i++;
     }
+    a.decode_tail(cnt_free_cells, decodebytes);
+    out.write_segment(decodebytes);
+
 
 }
 

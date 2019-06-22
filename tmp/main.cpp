@@ -36,14 +36,14 @@ int main(int argc, char *argv[]) {
         try {
             compress(inp, outp);
         } catch (std::exception const &e) {
-            cout << "error";
+            cout << e.what() << endl;
             return 0;
         }
     } else if (mode == 2) {
         try {
             decompress(argv[2], outp);
         } catch (std::exception const &e) {
-            cout << "error";
+            cout << e.what() << endl;
             return 0;
         }
     } else {

@@ -19,7 +19,7 @@ void fwriter::write_segment(vector<unsigned char> &seg) {
         fwrite(seg.data(), sizeof(unsigned char), seg.size(), file);
     }
     if (ferror(file)) {
-        throw std::runtime_error("error reading");
+        throw std::runtime_error("error while writing");
     }
 }
 
@@ -50,7 +50,7 @@ void fwriter::write_tail() {
 void fwriter::write_segment(vector<int> &seg) {
     fwrite(seg.data(), sizeof(int), seg.size(), file);
     if (ferror(file)) {
-        throw std::runtime_error("error reading");
+        throw std::runtime_error("error while writing");
     }
 }
 
