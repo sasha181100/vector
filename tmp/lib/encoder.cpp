@@ -16,6 +16,7 @@ encoder::encoder() {
         chl[i] = {-1, -1};
         if (i < N) {
             frec[i] = 0;
+
         }
     }
 }
@@ -51,7 +52,9 @@ void encoder::build() {
     }
 }
 void encoder::cnt_codes(int v, vector<bool> code) {
+    if (v < 0) return;
     if (chl[v].first == -1) {
+
         codes[cd[v]] = code;
     } else {
         code.push_back(0);

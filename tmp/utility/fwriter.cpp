@@ -10,12 +10,14 @@
 fwriter::fwriter(char *name, char *md) {
     file = fopen(name, md);
     if (file == nullptr) {
-        throw;
+        throw std::runtime_error("while opening");
     }
 }
 
 void fwriter::write_segment(vector<unsigned char> &seg) {
-    fwrite(seg.data(), sizeof(unsigned char), seg.size(), file);
+    if (seg.size() != 0) {
+        fwrite(seg.data(), sizeof(unsigned char), seg.size(), file);
+    }
     if (ferror(file)) {
         throw std::runtime_error("error reading");
     }

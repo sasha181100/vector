@@ -9,7 +9,7 @@
 freader::freader(char *name, char *md) {
     file = fopen(name, md);
     if (file == nullptr) {
-        throw;
+        throw std::runtime_error("while opening");
     }
 }
 

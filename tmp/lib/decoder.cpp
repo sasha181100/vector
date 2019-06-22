@@ -29,6 +29,7 @@ void decoder::cnt_codes() {
 }
 
 void decoder::dfs(int v, vector<bool> code) {
+    if (v < 0) return;
     if (leaf[v] != -1) {
         codes[cd[v]] = code;
     } else {
