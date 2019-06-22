@@ -8,16 +8,17 @@
 #include <vector>
 #include <cstdio>
 
-using namespace std;
+
 
 struct fwriter {
-    fwriter(char *name, char *md);
+    fwriter(char const *name, char const *md);
+    fwriter(fwriter const&) = delete;
     ~fwriter();
-    void write_segment(vector<unsigned char> &bytes);
-    void write_segment(vector<bool> &bools);
+    void write_segment(std::vector<unsigned char> const &bytes);
+    void write_segment(std::vector<bool> const &bools);
     void write_tail();
-    void write_char(unsigned char &);
-    void write_segment(vector<int> &ints);
+    void write_char(unsigned char const &chars);
+    void write_segment(std::vector<int> const &ints);
 private:
     FILE *file;
     unsigned char tail = 0;

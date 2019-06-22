@@ -9,11 +9,11 @@
 #include "../lib/decoder.h"
 #include <stdexcept>
 
-void compress(char *input,  char *output) {
+void compress(char const *input,  char const *output) {
 
     freader in(input, "r");
     fwriter out(output, "w");
-    vector<unsigned char> bytes;
+    std::vector<unsigned char> bytes;
     encoder a;
     while(in.read_segment(8192, bytes)) {
         a.count_frec(bytes);
@@ -21,7 +21,7 @@ void compress(char *input,  char *output) {
 
     a.build();
 
-    vector<int> frec;
+    std::vector<int> frec;
     frec = a.get_frec();
 
     out.write_segment(frec);
@@ -30,7 +30,7 @@ void compress(char *input,  char *output) {
     out.write_char(cnt_free_cells);
     in.restart();
     bytes.clear();
-    vector<bool> compress_bytes;
+    std::vector<bool> compress_bytes;
     while (in.read_segment(8192, bytes)) {
         a.compress(bytes, compress_bytes);
         out.write_segment(compress_bytes);
@@ -40,13 +40,13 @@ void compress(char *input,  char *output) {
     out.write_tail();
 }
 
-void decompress(char *input, char *output) {
+void decompress(char const*input, char const*output) {
 
     freader in(input, "r");
     fwriter out(output, "w");
     decoder a;
     int x;
-    vector<int> frec;
+    std::vector<int> frec;
     unsigned char c;
 
     for (size_t i = 0; i < 256; i++) {
@@ -77,7 +77,7 @@ void decompress(char *input, char *output) {
     a.set_frec(frec);
     a.build();
 
-    vector<unsigned char> bytes, decodebytes;
+    std::vector<unsigned char> bytes, decodebytes;
     int i = 0;
 
     while (in.read_segment(8192, bytes)) {

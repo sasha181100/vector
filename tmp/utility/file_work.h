@@ -5,7 +5,7 @@
 #ifndef HUFFMAN_FILE_WORK_H
 #define HUFFMAN_FILE_WORK_H
 
-void compress(char *, char *);
-void decompress(char *, char *);
+void compress(char const*, char const*);
+void decompress(char const*, char const*);
 
 #endif //HUFFMAN_FILE_WORK_H

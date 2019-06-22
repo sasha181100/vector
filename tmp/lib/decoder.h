@@ -8,30 +8,29 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
 
 struct decoder {
 public:
     static unsigned const int N = 256;
     decoder();
-    void decode(vector<unsigned char> &inp, vector<unsigned char> &outp);
-    void set_frec(vector<int> &);
+    void decode(std::vector<unsigned char> const &inp, std::vector<unsigned char> &outp);
+    void set_frec(std::vector<int> const&);
     void build();
     void cnt_codes();
-    void decode_tail(int, vector<unsigned char> &);
+    void decode_tail(int, std::vector<unsigned char> &);
 
 
 private:
     int frec[N];
     unsigned char cd[2 * N];
-    vector<bool> codes[N];
+    std::vector<bool> codes[N];
     //void cnt_codes(int, vector<bool>);
-    void dfs(int, vector<bool>);
+    void dfs(int, std::vector<bool>);
     int par[2 * N];
-    pair<int, int> chl[2 * N];
+    std::pair<int, int> chl[2 * N];
     unsigned char tail;
     int leaf[2 * N];
-    vector<bool> now_code;
+    std::vector<bool> now_code;
     int root;
     int cur_ver;
 };

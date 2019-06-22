@@ -6,14 +6,14 @@
 #include <cstdio>
 #include <iostream>
 
-freader::freader(char *name, char *md) {
+freader::freader(char const *name, char const *md) {
     file = fopen(name, md);
     if (file == nullptr) {
         throw std::runtime_error("error while opening");
     }
 }
 
-size_t freader::read_segment(size_t sz, vector<unsigned char> &seg) {
+size_t freader::read_segment(size_t sz, std::vector<unsigned char> &seg) {
     seg.resize(sz);
     size_t cnt = fread(seg.data(), 1, sz, file);
     size_t x = seg.size();

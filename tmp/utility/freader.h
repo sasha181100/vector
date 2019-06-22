@@ -7,12 +7,11 @@
 #include <vector>
 #include <cstdio>
 
-using namespace std;
-
 struct freader {
-    freader(char *name, char *md);
+    freader(char const *name, char const *md);
+    freader(freader const&) = delete;
     ~freader();
-    size_t read_segment(size_t sz, vector<unsigned char> &bytes);
+    size_t read_segment(size_t sz, std::vector<unsigned char> &bytes);
     void read_char(unsigned char &c);
     void restart();
 

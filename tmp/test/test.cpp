@@ -8,8 +8,7 @@
 #include "test.h"
 #include "../utility/freader.h"
 #include "../utility/fwriter.h"
-using namespace std;
-char buf1[2048], buf2[2048];
+
 
 void correctness() {
     compress("input.txt", "compressed_input.txt");
@@ -18,11 +17,10 @@ void correctness() {
     freader fin1("input.txt", "r");
     freader fin2("output.txt", "r");
     bool correct = 1;
-    vector<unsigned char> bytes1, bytes2;
-    size_t cnt1;
-    size_t cnt2;
-    while (cnt1 = fin1.read_segment(8192, bytes1)) {
-        cnt2 = fin2.read_segment(8192, bytes2);
+    std::vector<unsigned char> bytes1, bytes2;
+
+    while (fin1.read_segment(8192, bytes1)) {
+        fin2.read_segment(8192, bytes2);
         if (bytes1 != bytes2) {
             correct = 0;
             //break;
@@ -34,13 +32,13 @@ void correctness() {
 
 
     if (correct) {
-        cout << "OK" << endl;
+        std::cout << "OK" << std::endl;
     } else {
-        cout << "FAILED" << endl;
+        std::cout << "FAILED" << std::endl;
     }
 }
 
-void end_of_test(ofstream &out) {
+void end_of_test(std::ofstream &out) {
     out.close();
     correctness();
     out.open("input.txt");
@@ -49,7 +47,7 @@ void end_of_test(ofstream &out) {
 
 
 void test() {
-    ofstream fout("input.txt");
+    std::ofstream fout("input.txt");
 
 
     fout << "";

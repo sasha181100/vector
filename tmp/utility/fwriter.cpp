@@ -7,14 +7,14 @@
 #include <iostream>
 #include <stdexcept>
 
-fwriter::fwriter(char *name, char *md) {
+fwriter::fwriter(char const *name, char const *md) {
     file = fopen(name, md);
     if (file == nullptr) {
         throw std::runtime_error("while opening");
     }
 }
 
-void fwriter::write_segment(vector<unsigned char> &seg) {
+void fwriter::write_segment(std::vector<unsigned char> const &seg) {
     if (seg.size() != 0) {
         fwrite(seg.data(), sizeof(unsigned char), seg.size(), file);
     }
@@ -23,7 +23,7 @@ void fwriter::write_segment(vector<unsigned char> &seg) {
     }
 }
 
-void fwriter::write_segment(vector<bool> &bools) {
+void fwriter::write_segment(std::vector<bool> const &bools) {
     for (size_t i = 0; i < bools.size(); i++) {
         tail <<= 1;
         tail += bools[i];
@@ -36,7 +36,7 @@ void fwriter::write_segment(vector<bool> &bools) {
     }
 }
 
-void fwriter::write_char(unsigned char &c) {
+void fwriter::write_char(unsigned char const &c) {
     fwrite(&c, 1, 1, file);
 }
 
@@ -47,7 +47,7 @@ void fwriter::write_tail() {
     }
 }
 
-void fwriter::write_segment(vector<int> &seg) {
+void fwriter::write_segment(std::vector<int> const &seg) {
     fwrite(seg.data(), sizeof(int), seg.size(), file);
     if (ferror(file)) {
         throw std::runtime_error("error while writing");

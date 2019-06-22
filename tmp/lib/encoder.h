@@ -8,23 +8,22 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
 
 struct encoder {
     static const int N = 256;
     encoder();
-    void compress(vector<unsigned char> &, vector<bool> &);
+    void compress(std::vector<unsigned char> const&, std::vector<bool> &);
     void build();
-    vector<bool> codes[N];
-    void count_frec(vector<unsigned char> &);
+    std::vector<bool> codes[N];
+    void count_frec(std::vector<unsigned char> const&);
     long long count_encoded_length();
-    vector<int> get_frec();
+    std::vector<int> get_frec();
 private:
     int frec[N];
     unsigned char cd[2 * N];
-    void cnt_codes(int, vector<bool>);
+    void cnt_codes(int, std::vector<bool>);
     int par[2 * N];
-    pair<int, int> chl[2 * N];
+    std::pair<int, int> chl[2 * N];
     int root;
 };
 

@@ -7,8 +7,6 @@
 #include <set>
 
 
-using namespace std;
-
 decoder::decoder() {
     for (int i = 0; i < 2 * N; i++) {
         par[i] = -1;
@@ -17,18 +15,18 @@ decoder::decoder() {
     }
 }
 
-void decoder::set_frec(vector<int> &fr) {
+void decoder::set_frec(std::vector<int> const&fr) {
     for (size_t i = 0; i < fr.size(); i++) {
         frec[i] = fr[i];
     }
 }
 
 void decoder::cnt_codes() {
-    vector<bool> code;
+    std::vector<bool> code;
     dfs(root, code);
 }
 
-void decoder::dfs(int v, vector<bool> code) {
+void decoder::dfs(int v, std::vector<bool> code) {
     if (v < 0) return;
     if (leaf[v] != -1) {
         codes[cd[v]] = code;
@@ -42,7 +40,7 @@ void decoder::dfs(int v, vector<bool> code) {
 }
 
 void decoder::build() {
-    set<pair<int, int>> lst;
+    std::set<std::pair<int, int>> lst;
     size_t num = 0;
     for (int i = 0; i < N; i++) {
         if (frec[i] != 0) {
@@ -52,7 +50,7 @@ void decoder::build() {
             num++;
         }
     }
-    pair<int, int> a1, a2;
+    std::pair<int, int> a1, a2;
     while (lst.size() > 1) {
         a1 = *lst.begin();
         lst.erase(a1);
@@ -67,7 +65,7 @@ void decoder::build() {
     }
     root = num - 1;
     cur_ver = root;
-    vector<bool> code;
+    std::vector<bool> code;
     if (root == 0) {
         codes[cd[lst.begin()->second]].push_back(0);
     } else {
@@ -75,7 +73,7 @@ void decoder::build() {
     }
 }
 
-void decoder::decode(vector<unsigned char> &in, vector<unsigned char> &out) {
+void decoder::decode(std::vector<unsigned char> const &in, std::vector<unsigned char> &out) {
     tail = in.back();
     if (root == 0) {
         for (size_t i = 0; i < 8 * (in.size() - 1); i++) {
@@ -101,7 +99,7 @@ void decoder::decode(vector<unsigned char> &in, vector<unsigned char> &out) {
 }
 
 
-void decoder::decode_tail(int cnt_free_cells, vector<unsigned char> &out) {
+void decoder::decode_tail(int cnt_free_cells, std::vector<unsigned char> &out) {
     bool bit;
     if (root == 0) {
         for (size_t i = 0; i < 8 - cnt_free_cells; i++) {

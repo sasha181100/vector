@@ -65,7 +65,7 @@ void encoder::cnt_codes(int v, vector<bool> code) {
     }
 }
 
-void encoder::compress(vector<unsigned char> &in, vector<bool> &out) {
+void encoder::compress(vector<unsigned char> const &in, vector<bool> &out) {
     for (size_t i = 0; i < in.size(); i++) {
         for (size_t j = 0; j < codes[in[i]].size(); j++) {
             out.push_back(codes[in[i]][j]);
@@ -73,7 +73,7 @@ void encoder::compress(vector<unsigned char> &in, vector<bool> &out) {
     };
 }
 
-void encoder::count_frec(vector<unsigned char> &a) {
+void encoder::count_frec(vector<unsigned char> const&a) {
     for (size_t i = 0; i < a.size(); i++) {
         frec[a[i]]++;
     }

@@ -6,7 +6,7 @@
 #include <cstring>
 #include "utility/file_work.h"
 #include "test/test.h"
-using namespace std;
+
 
 int main(int argc, char *argv[]) {
     int mode = 0;
@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
         } else if (strcmp(argv[1], "-d") == 0) {
             mode = 2;
         } else {
-            cout << "Incorrect mode" << endl << "info for more information";
+            std::cout << "Incorrect mode" << std::endl << "info for more information";
             return 0;
         }
     }
@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
             return 0;
         } else if (strcmp(argv[1], "-info") == 0) {
             //info
-            cout << "Welcome to library for compression of Huffman.\nThere are 4 modes for working:\n   -e: encode input file in output file\n  -d: decode information from input file to output\n  -t: check the program on correctness\nHave a great time!";
+            std::cout << "Welcome to library for compression of Huffman.\nThere are 4 modes for working:\n   -e: encode input file in output file\n  -d: decode information from input file to output\n  -t: check the program on correctness\nHave a great time!";
             return 0;
         }
     }
@@ -36,18 +36,18 @@ int main(int argc, char *argv[]) {
         try {
             compress(inp, outp);
         } catch (std::exception const &e) {
-            cout << e.what() << endl;
+            std::cout << e.what() << std::endl;
             return 0;
         }
     } else if (mode == 2) {
         try {
             decompress(argv[2], outp);
         } catch (std::exception const &e) {
-            cout << e.what() << endl;
+            std::cout << e.what() << std::endl;
             return 0;
         }
     } else {
-        cout << "Incorrect numbers of args" << endl << "info for more information";
+        std::cout << "Incorrect numbers of args" << std::endl << "info for more information";
         return 0;
     }
 }
