@@ -1,0 +1,3 @@
+/home/pokerstar/hw/cpp-course-master/huffman/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/pokerstar/hw/cpp-course-master/huffman/cmake-build-debug/CMakeFiles/huffman.dir
+/home/pokerstar/hw/cpp-course-master/huffman/cmake-build-debug/CMakeFiles/edit_cache.dir

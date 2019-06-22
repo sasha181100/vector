@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/pokerstar/hw/cpp-course-master/huffman/main.cpp
+iostream
+-
+cstring
+-
+utility/file_work.h
+/home/pokerstar/hw/cpp-course-master/huffman/utility/file_work.h
+test/test.cpp
+/home/pokerstar/hw/cpp-course-master/huffman/test/test.cpp
+
+/home/pokerstar/hw/cpp-course-master/huffman/test/test.cpp
+../utility/file_work.h
+/home/pokerstar/hw/cpp-course-master/huffman/utility/file_work.h
+fstream
+-
+iostream
+-
+
+/home/pokerstar/hw/cpp-course-master/huffman/utility/file_work.h
+
