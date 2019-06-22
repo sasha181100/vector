@@ -33,9 +33,19 @@ int main(int argc, char *argv[]) {
     char *inp = argv[2];
     char *outp = argv[3];
     if (mode == 1) {
-        compress(inp, outp);
+        try {
+            compress(inp, outp);
+        } catch (std::exception const &e) {
+            cout << "error";
+            return 0;
+        }
     } else if (mode == 2) {
-        decompress(argv[2], outp);
+        try {
+            decompress(argv[2], outp);
+        } catch (std::exception const &e) {
+            cout << "error";
+            return 0;
+        }
     } else {
         cout << "Incorrect numbers of args" << endl << "info for more information";
         return 0;

@@ -27,6 +27,9 @@ size_t freader::read_segment(size_t sz, vector<unsigned char> &seg) {
 }
 void freader::read_char(unsigned char &c) {
     fread(&c, 1, 1, file);
+    if (ferror(file)) {
+        throw;
+    }
 }
 freader::~freader() {
     fclose(file);

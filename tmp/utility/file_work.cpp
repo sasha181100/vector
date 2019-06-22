@@ -24,11 +24,8 @@ void compress(char *input,  char *output) {
     vector<int> frec;
     frec = a.get_frec();
 
-    try {
-        out.write_segment(frec);
-    } catch (std::runtime_error const &e) {
-        throw;
-    }
+    out.write_segment(frec);
+
     unsigned char cnt_free_cells = (8 - a.count_encoded_length() % 8) % 8;
     out.write_char(cnt_free_cells);
     in.restart();
@@ -76,26 +73,34 @@ void decompress(char *input, char *output) {
         return;
     }
     unsigned char cnt_free_cells;
-    in.read_char(cnt_free_cells);
+    try {
+        in.read_char(cnt_free_cells);
+    }  catch (std::runtime_error const & e) {
+        throw;
+    }
     a.set_frec(frec);
     a.build();
 
     vector<unsigned char> bytes, decodebytes;
     int i = 0;
-    while (in.read_segment(8192, bytes)) {
-        if (i != 0) {
-            a.decode_tail(0, decodebytes);
+    try {
+        while (in.read_segment(8192, bytes)) {
+            if (i != 0) {
+                a.decode_tail(0, decodebytes);
+                out.write_segment(decodebytes);
+                decodebytes.clear();
+            }
+            a.decode(bytes, decodebytes);
             out.write_segment(decodebytes);
+            bytes.clear();
             decodebytes.clear();
+            i++;
         }
-        a.decode(bytes, decodebytes);
+        a.decode_tail(cnt_free_cells, decodebytes);
         out.write_segment(decodebytes);
-        bytes.clear();
-        decodebytes.clear();
-        i++;
+    }  catch (std::runtime_error const & e) {
+        throw;
     }
-    a.decode_tail(cnt_free_cells, decodebytes);
-    out.write_segment(decodebytes);
 
 }
 
