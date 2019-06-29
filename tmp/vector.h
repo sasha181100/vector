@@ -5,18 +5,6 @@
 
 template<typename T>
 struct vector {
-    // No data
-    // info = nullptr;
-
-    // Small data
-    // Small object is valid
-    // info = &small_obj;
-
-    // Big data
-    // capacity - info[0]
-    // size - info[1]
-    // count links - info[2]
-    // data begins from info[3] ~ array[0]
 public:
     typedef T value_type;
     typedef T *iterator;
